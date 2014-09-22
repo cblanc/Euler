@@ -29,6 +29,10 @@ type QuadraticCombination struct {
 func isPrime(n int, primes []int) bool {
 	limit := n
 
+	if n < 0 {
+		return false
+	}
+
 	for i := 0; primes[i] < limit; i++ {
 		if n%primes[i] == 0 {
 			return false
@@ -63,7 +67,7 @@ func main() {
 
 	for a := -1000; a <= 1000; a++ {
 		for b := -1000; b <= 1000; b++ {
-			if maxPrimes = maxConsecutivePrimes(a, b, primes); maxPrimes > max.consecutivePrimes {
+			if maxPrimes = maxConsecutivePrimes(a, b, primes); maxPrimes >= max.consecutivePrimes {
 				max.a = a
 				max.b = b
 				max.consecutivePrimes = maxPrimes
