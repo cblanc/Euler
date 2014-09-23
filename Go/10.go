@@ -10,7 +10,7 @@ func eliminateFactors(candidates [2000000]bool, factor int) [2000000]bool {
 	index := factor * 2
 	for index < len(candidates) {
 		candidates[index] = false
-		index := factor
+		index += factor
 	}
 	return candidates
 }
@@ -23,16 +23,50 @@ func initCandidates() [2000000]bool {
 	return candidates
 }
 
+func nextPrime(start int, candidates [2000000]bool) int {
+	index := start + 1
+	if index == 2000000 {
+		return 2000000
+	}
+	for candidates[index] == false {
+		index++
+		if index == 2000000 {
+			return 2000000
+		}
+	}
+	return index
+}
+
+func sum(candidates [2000000]bool) int {
+	result := 0
+	for i := range candidates {
+		if candidates[i] {
+			result += i
+		}
+	}
+	return result
+}
+
 func main() {
 	candidates := initCandidates()
-	fmt.Println(candidates[0])
 
 	// Initialise the first few
 	candidates[0] = false // 0 isn't prime
 	candidates[1] = false // 1 isn't prime
 	candidates[2] = true
 	lastPrime := 2
+	candidates = eliminateFactors(candidates, lastPrime)
 
+	for lastPrime < 2000000 {
+		lastPrime = nextPrime(lastPrime, candidates)
+		candidates = eliminateFactors(candidates, lastPrime)
+	}
+
+	for i := range candidates {
+		if candidates[i] {
+			fmt.Println(i)
+		}
+	}
 }
 
 // Naieve Implementation
