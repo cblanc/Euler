@@ -34,6 +34,7 @@ func nextPrime(start int, candidates [2000000]bool) int {
 			return 2000000
 		}
 	}
+	fmt.Println(index)
 	return index
 }
 
@@ -62,11 +63,7 @@ func main() {
 		candidates = eliminateFactors(candidates, lastPrime)
 	}
 
-	for i := range candidates {
-		if candidates[i] {
-			fmt.Println(i)
-		}
-	}
+	fmt.Println(sum(candidates))
 }
 
 // Naieve Implementation
